@@ -8,7 +8,7 @@
     box-sizing: border-box
 
 html
-    background-color: $dark-grey
+    background-color: $background-white
     font-family: $font
     font-size: 16px
 
@@ -32,7 +32,7 @@ header
 
 h1,h2,h3
     margin-bottom: 0.5em
-    font-family: 'Didact Gothic', sans-serif
+    font-family: $font
     opacity: 0.6
 
 li
@@ -49,7 +49,6 @@ p
 a
     color: $links
     text-decoration: none
-    border-bottom: 2px solid $links
     +ease(0.5s)
     &:hover
         color: $links-hover
@@ -66,7 +65,7 @@ nav
 
 .wrap
     margin: 0 auto
-    width: 45%
+    width: 55% // og width: 45%
     max-width: 64em
     @media screen and (max-width: 736px)
         width: 90%
