@@ -21,7 +21,7 @@
     <header class="wrap gallery-header"> 
         
         {{ $keepAspectRatio := default false .Params.keepAspectRatio }}
-        {{ $image := .Resources.GetMatch "*all-photos*.jpg"}}
+        {{ $image := .Resources.GetMatch "*all*.jpg"}}
         {{ if $image }}
             {{ $resized := $image.Resize $.Params.maxWidth }}
             <!-- TODO: Clean this -->

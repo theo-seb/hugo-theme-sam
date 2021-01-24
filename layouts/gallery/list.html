@@ -6,7 +6,7 @@
 {{ $keepAspectRatio := default false .Params.keepAspectRatio }}
 {{ if .Params.clickablePhotos }}
     <div class="grid {{ cond $keepAspectRatio "keep-aspect-ratio" "" }}">
-    {{ $images := .Resources.ByType "image" }}
+    {{ $images := .Resources.Match "*single*.jpg" }}
     {{ range $index, $element := $images }}
         {{ $resized := $element.Resize $.Params.maxWidth }}
         <div>
