@@ -4,8 +4,10 @@
 </article>
 
 {{ $keepAspectRatio := default false .Params.keepAspectRatio }}
+{{ $numberOfImagesPerLine := default 1 .Params.numberOfImagesPerLine }}
 {{ if .Params.clickablePhotos }}
-    <div class="grid {{ cond $keepAspectRatio "keep-aspect-ratio" "" }}">
+    <div class="grid {{ cond $keepAspectRatio "keep-aspect-ratio" "" }}" 
+        style="grid-template-columns: repeat({{ $numberOfImagesPerLine }}, 1fr)">
     {{ $images := .Resources.Match "*single*.jpg" }}
     {{ range $index, $element := $images }}
         {{ $resized := $element.Resize $.Params.maxWidth }}
@@ -17,7 +19,8 @@
     {{ end }}
     </div>
 {{ else }}
-    <div class="grid {{ cond $keepAspectRatio "keep-aspect-ratio" "" }}">
+    <div class="grid {{ cond $keepAspectRatio "keep-aspect-ratio" "" }}" 
+        style="grid-template-columns: repeat({{ $numberOfImagesPerLine }}, 1fr)">
     {{ $images := .Resources.ByType "image" }}
     {{ range shuffle $images }}
         {{ $resized := .Resize $.Params.maxWidth }}
