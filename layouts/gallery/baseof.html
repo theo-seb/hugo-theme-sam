@@ -19,17 +19,10 @@
 <body>
     {{ block "header" . }}
     <header class="wrap gallery-header"> 
-        
-        {{ $keepAspectRatio := default false .Params.keepAspectRatio }}
+
         {{ $image := .Resources.GetMatch "*all*.jpg"}}
         {{ if $image }}
-            {{ $resized := $image.Resize $.Params.maxWidth }}
-            <!-- TODO: Clean this -->
-            <div class="grid {{ cond $keepAspectRatio "keep-aspect-ratio" "" }}">
-                <div>
-                    <img src="{{ $resized.RelPermalink }}" alt="{{ $image.Name }}"/>
-                </div>
-            </div>
+            <img src="{{ $image.RelPermalink }}" alt="{{ $image.Name }}"/>
         {{ end }}
 
         <div class="flex-container">
