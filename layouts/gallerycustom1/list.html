@@ -7,7 +7,7 @@
 {{ $numberOfImagesPerLine := default 1 .Params.numberOfImagesPerLine }}
 {{ if .Params.clickablePhotos }}
     <div class="grid {{ cond $keepAspectRatio "keep-aspect-ratio" "" }}" 
-        style="grid-template-columns: repeat(3, 1fr)">
+        style="grid-template-columns: repeat(4, 1fr)">
     {{ $images := .Resources.Match "*single*.jpg" }}
     {{ range $index, $element := $images }}
         {{ $resized := $element.Resize $.Params.maxWidth }}
