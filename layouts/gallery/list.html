@@ -5,14 +5,17 @@
 
 {{ $keepAspectRatio := default false .Params.keepAspectRatio }}
 {{ $numberOfImagesPerLine := default 1 .Params.numberOfImagesPerLine }}
+{{ $imagePercentageWidth := default 100 .Params.imagePercentageWidth }}
 {{ if .Params.clickablePhotos }}
     <div class="grid {{ cond $keepAspectRatio "keep-aspect-ratio" "" }}" 
         style="grid-template-columns: repeat({{ $numberOfImagesPerLine }}, 1fr)">
     {{ $images := .Resources.Match "*single*.jpg" }}
     {{ range $index, $element := $images }}
         {{ $resized := $element.Resize $.Params.maxWidth }}
-        <div>
-            <a href="{{ $element.RelPermalink }}" data-size="{{ $element.Width }}x{{ $element.Height }}">
+        <div class="grid-image-container">
+            <a href="{{ $element.RelPermalink }}" 
+                data-size="{{ $element.Width }}x{{ $element.Height }}"
+                style="width: {{ $imagePercentageWidth }}%">
                 <img src="{{ $resized.RelPermalink }}" alt="{{ $element.Name }}" data-index="{{ $index }}"/>
             </a>
         </div>
@@ -24,7 +27,7 @@
     {{ $images := .Resources.ByType "image" }}
     {{ range shuffle $images }}
         {{ $resized := .Resize $.Params.maxWidth }}
-        <div>
+        <div class="grid-image-container">
             <img src="{{ $resized.RelPermalink }}" alt="{{ .Name }}" />
         </div>
     {{ end }}
