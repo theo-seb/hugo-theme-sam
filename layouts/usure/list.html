@@ -1,0 +1,43 @@
+{{ define "section_content" }}
+<article role="article" class="flex-container">
+    {{ .Content }}
+</article>
+
+{{ $keepAspectRatio := default false .Params.keepAspectRatio }}
+{{ $numberOfImagesPerLine := default 1 .Params.numberOfImagesPerLine }}
+{{ $imagePercentageWidth := default 100 .Params.imagePercentageWidth }}
+{{ if .Params.clickablePhotos }}
+    <div class="grid {{ cond $keepAspectRatio "keep-aspect-ratio" "" }}" 
+        style="grid-template-columns: repeat({{ $numberOfImagesPerLine }}, 1fr)">
+    {{ $images := .Resources.Match "*single*.jpg" }}
+    {{ range $index, $element := $images }}
+        {{ $resized := $element.Resize $.Params.maxWidth }}
+        <div class="grid-image-container">
+            <a href="{{ $element.RelPermalink }}" 
+                data-size="{{ $element.Width }}x{{ $element.Height }}"
+                style="width: {{ $imagePercentageWidth }}%">
+                <img src="{{ $resized.RelPermalink }}" alt="{{ $element.Name }}" data-index="{{ $index }}"/>
+            </a>
+        </div>
+    {{ end }}
+    </div>
+{{ else }}
+    <div class="grid {{ cond $keepAspectRatio "keep-aspect-ratio" "" }}" 
+        style="grid-template-columns: repeat({{ $numberOfImagesPerLine }}, 1fr)">
+    {{ $images := .Resources.ByType "image" }}
+    {{ range shuffle $images }}
+        {{ $resized := .Resize $.Params.maxWidth }}
+        <div class="grid-image-container">
+            <img src="{{ $resized.RelPermalink }}" alt="{{ .Name }}" />
+        </div>
+    {{ end }}
+    </div>
+{{ end }}
+
+<article role="article" class="flex-container">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+        <iframe src="https://www.youtube.com/embed/RusHiTNkmuY" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="L&#39;usure mécénique des roches 2"></iframe>
+    </div>
+</article>
+
+{{ end }}
