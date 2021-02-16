@@ -27,8 +27,8 @@
         {{ $images := .Resources.Match "*single*.jpg" }}
         {{ range $index, $element := $images }}
         {{ $resized := .Resize $.Params.maxWidth }}
-        <div class="grid-image-container">
-            <img src="{{ $resized.RelPermalink }}" alt="{{ .Name }}" />
+        <div class="grid-image-container" >
+            <img src="{{ $resized.RelPermalink }}" alt="{{ .Name }}" style="width: {{ $imagePercentageWidth }}%"/>
         </div>
     {{ end }}
     </div>
