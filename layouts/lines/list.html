@@ -26,7 +26,7 @@
 
     {{ $image := .Resources.GetMatch "*lines*4.jpg" }}
     {{ $resized := $image.Resize $.Params.maxWidth }}
-    <div class="grid-image-container" style="margin-bottom: 20%">
+    <div class="grid-image-container">
         <img src="{{ $resized.RelPermalink }}" alt="{{ .Name }}" style="width: 100%" />
     </div>
 
@@ -37,17 +37,6 @@
         <img src="{{ $resized.RelPermalink }}" alt="{{ .Name }}" style="width: 70%" />
     </div>
     {{ end }} -->
-</div>
-
-<div class="grid keep-aspect-ratio" 
-    style="grid-template-columns: repeat(2, 1fr)">
-    {{ $images := .Resources.Match "*paul*.jpg" }}
-    {{ range $index, $element := $images }}
-    {{ $resized := .Resize $.Params.maxWidth }}
-    <div class="grid-image-container">
-        <img src="{{ $resized.RelPermalink }}" alt="{{ .Name }}" />
-    </div>
-    {{ end }}
 </div>
 
 {{ end }}
